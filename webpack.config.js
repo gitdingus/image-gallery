@@ -10,7 +10,7 @@ module.exports = {
     filename: 'main.js',
   },
   optimization: {
-    minize: false,
+    minimize: false,
   },
   module: {
     rules: [
