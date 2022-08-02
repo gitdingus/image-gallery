@@ -16,8 +16,12 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /template\.html$/,
+        test: /template\.html$/i,
         type: 'asset/source',
+      },
+      {
+        test: /\.(jpg|jpeg)$/i,
+        type: 'asset/resource',
       },
     ],
   },
