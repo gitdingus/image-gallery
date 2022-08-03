@@ -53,6 +53,35 @@ function createImageGallery() {
     buttons.appendChild(getSvgFromTemplateFile(unselected));
   });
 
+  let currentImage = 0;
+  displayCurrentImage();
+  
+  function displayCurrentImage() {
+    imageContainer.style.top = `calc(${-currentImage}*100%)`;
+  }
+
+  function nextImage() {
+    currentImage += 1;
+
+    if (currentImage > imagesArray.length - 1) {
+      currentImage = 0;
+    }
+    displayCurrentImage();
+  }
+
+  function previousImage() {
+    currentImage -= 1;
+
+    if (currentImage < 0) {
+      currentImage = imagesArray.length - 1;
+    }
+
+    displayCurrentImage();
+  }
+
+  gallery.querySelector('.nav-left').addEventListener('click', previousImage);
+  gallery.querySelector('.nav-right').addEventListener('click', nextImage);
+
   return gallery;
 }
 
