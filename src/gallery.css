@@ -3,9 +3,14 @@
   grid-template-columns: 75px 1fr 75px;
   grid-template-rows: 1fr 75px;
 
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
 }
 
+.gallery .image-pane div{
+  height: 100%;
+}
 .gallery .nav-left{
   grid-area: 1 / 1 / 2 / 2;
 }
@@ -14,14 +19,31 @@
   grid-area: 1 / 3 / 2 / 4;
 }
 
+.gallery .nav-left,
+.gallery .nav-right,
+.gallery .gallery-buttons{
+  align-self: center;
+  justify-self: center;
+}
+
 .gallery .image-pane{
   grid-area: 1 / 2 / 2 / 3;
+
+  overflow: hidden;
+}
+
+.gallery .image-pane .image-container .image-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .gallery .image-pane img{
-  width: 100%;
+  height: 100%;
 }
 
 .gallery .gallery-buttons {
   grid-area: 2 / 1 / 3 / 4;
+
 }
