@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 75px 1fr 75px;
   grid-template-rows: 1fr 75px;
+
+  width: 100%;
 }
 
 .gallery .nav-left{
@@ -14,6 +16,10 @@
 
 .gallery .image-pane{
   grid-area: 1 / 2 / 2 / 3;
+}
+
+.gallery .image-pane img{
+  width: 100%;
 }
 
 .gallery .gallery-buttons {
