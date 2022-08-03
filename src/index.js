@@ -46,7 +46,9 @@ function createImageGallery() {
   const imageContainer = gallery.querySelector('.image-container');
   const buttons = gallery.querySelector('.gallery-buttons');
 
-  buildImagesArray().forEach((img) => {
+  const imagesArray = buildImagesArray();
+
+  imagesArray.forEach((img) => {
     imageContainer.appendChild(getWrappedImage(img));
     buttons.appendChild(getSvgFromTemplateFile(unselected));
   });
