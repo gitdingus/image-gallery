@@ -47,6 +47,10 @@
   overflow: hidden;
 }
 
+.gallery .image-pane .image-container{
+  position: relative;
+}
+
 .gallery .image-pane .image-container .image-wrapper{
   display: flex;
   align-items: center;
