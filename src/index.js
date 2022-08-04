@@ -2,17 +2,10 @@ import { createHtmlElement } from 'dom-utils';
 import galleryHtml from './templates/gallery-template.html';
 import unselected from './templates/radio-unselected-svg-template.html';
 import selected from './templates/radio-selected-svg-template.html';
-import pipe1 from './images/pipe-1.jpg';
-import pipe2 from './images/pipe-2.jpg';
-import pipe3 from './images/pipe-3.jpeg';
-import pipe4 from './images/pipe-4.jpeg';
 import './gallery.css';
 
-function buildImagesArray() {
-  return [pipe1, pipe2, pipe3, pipe4];
-}
 
-function createImageGallery() {
+function createImageGallery(images) {
   let currentImage = 0;
 
   const galleryTemplate = createHtmlElement({ tag: 'template' });
@@ -21,9 +14,7 @@ function createImageGallery() {
   const gallery = galleryTemplate.content.firstElementChild.cloneNode(true);
   const imageContainer = gallery.querySelector('.image-container');
 
-  const imagesArray = buildImagesArray();
-
-  imagesArray.forEach((img) => {
+  images.forEach((img) => {
     imageContainer.appendChild(getWrappedImage(img));
   });
   function clearGalleryButtons() {
