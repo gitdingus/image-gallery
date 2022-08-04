@@ -105,5 +105,3 @@ function createImageGallery(images) {
   return gallery;
 }
 
-const container = document.querySelector('.container');
-container.appendChild(createImageGallery());
