@@ -50,11 +50,6 @@ export default function createImageGallery(images) {
     return svg;
   }
 
-  function displayImage(index) {
-    imageContainer.style.top = `calc(${-index}*100%)`;
-    buildButtonsPanel();
-  }
-
   function buildButtonsPanel() {
     const imagesDiv = gallery.querySelectorAll('.gallery .image-wrapper');
     const buttons = gallery.querySelector('.gallery .gallery-buttons');
@@ -74,6 +69,11 @@ export default function createImageGallery(images) {
 
       buttons.appendChild(newButton);
     });
+  }
+
+  function displayImage(index) {
+    imageContainer.style.top = `calc(${-index}*100%)`;
+    buildButtonsPanel();
   }
 
   displayImage(currentImage);
@@ -104,4 +104,3 @@ export default function createImageGallery(images) {
 
   return gallery;
 }
-
