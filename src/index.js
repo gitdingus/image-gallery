@@ -87,6 +87,37 @@ function createImageGallery() {
   gallery.querySelector('.nav-left').addEventListener('click', previousImage);
   gallery.querySelector('.nav-right').addEventListener('click', nextImage);
 
+  function clearGalleryButtons() {
+    const buttonContainer = gallery.querySelector('.gallery .gallery-buttons');
+
+    while (buttonContainer.hasChildNodes() === true) {
+      buttonContainer.firstChild.remove();
+    }
+  }
+
+  function buildButtonsPanel() {
+    const images = gallery.querySelectorAll('.gallery .image-wrapper');
+    const buttons = gallery.querySelector('.gallery .gallery-buttons');
+    clearGalleryButtons();
+
+    images.forEach((item, index) => {
+      let newButton;
+      if (index === currentImage) {
+        newButton = getSvgFromTemplateFile(selected);
+      } else {
+        newButton = getSvgFromTemplateFile(unselected);
+      }
+
+      newButton.addEventListener('click', () => {
+        displayImage(index);
+      });
+
+      buttons.appendChild(newButton);
+    });
+  }
+
+  setInterval(nextImage, 5000);
+
   return gallery;
 }
 
