@@ -4,7 +4,7 @@ import unselected from './templates/radio-unselected-svg-template.html';
 import selected from './templates/radio-selected-svg-template.html';
 import './gallery.css';
 
-function createImageGallery(images) {
+export default function createImageGallery(images) {
   let currentImage = 0;
 
   const galleryTemplate = createHtmlElement({ tag: 'template' });
