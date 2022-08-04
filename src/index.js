@@ -64,7 +64,7 @@ export default function createImageGallery(images) {
       }
 
       newButton.addEventListener('click', () => {
-        displayImage(index);
+        displayImage(index); // eslint-disable-line no-use-before-define
       });
 
       buttons.appendChild(newButton);
