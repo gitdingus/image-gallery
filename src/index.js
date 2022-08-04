@@ -72,6 +72,7 @@ export default function createImageGallery(images) {
   }
 
   function displayImage(index) {
+    currentImage = index;
     imageContainer.style.top = `calc(${-index}*100%)`;
     buildButtonsPanel();
   }
