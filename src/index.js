@@ -39,25 +39,30 @@ function getWrappedImage(img) {
 }
 
 function createImageGallery() {
+  let currentImage = 0;
+
   const galleryTemplate = createHtmlElement({ tag: 'template' });
   galleryTemplate.innerHTML = galleryHtml;
 
   const gallery = galleryTemplate.content.firstElementChild.cloneNode(true);
   const imageContainer = gallery.querySelector('.image-container');
-  const buttons = gallery.querySelector('.gallery-buttons');
 
   const imagesArray = buildImagesArray();
 
   imagesArray.forEach((img) => {
     imageContainer.appendChild(getWrappedImage(img));
-    buttons.appendChild(getSvgFromTemplateFile(unselected));
   });
 
-  let currentImage = 0;
   displayCurrentImage();
-  
+
   function displayCurrentImage() {
     imageContainer.style.top = `calc(${-currentImage}*100%)`;
+    buildButtonsPanel();
+  }
+
+  function displayImage(index) {
+    currentImage = index;
+    displayCurrentImage();
   }
 
   function nextImage() {
