@@ -12,32 +12,6 @@ function buildImagesArray() {
   return [pipe1, pipe2, pipe3, pipe4];
 }
 
-function getSvgFromTemplateFile(template) {
-  const svgTemplate = createHtmlElement({ tag: 'template' });
-  svgTemplate.innerHTML = template;
-
-  const svg = svgTemplate.content.firstElementChild.cloneNode(true);
-
-  return svg;
-}
-
-function getWrappedImage(img) {
-  const imageWrapper = createHtmlElement({
-    tag: 'div',
-    classes: ['image-wrapper'],
-  });
-  const image = createHtmlElement({
-    tag: 'img',
-    properties: {
-      src: img,
-    },
-  });
-
-  imageWrapper.appendChild(image);
-
-  return imageWrapper;
-}
-
 function createImageGallery() {
   let currentImage = 0;
 
@@ -52,9 +26,42 @@ function createImageGallery() {
   imagesArray.forEach((img) => {
     imageContainer.appendChild(getWrappedImage(img));
   });
+  function clearGalleryButtons() {
+    const buttonContainer = gallery.querySelector('.gallery .gallery-buttons');
 
-  displayCurrentImage();
+    while (buttonContainer.hasChildNodes() === true) {
+      buttonContainer.firstChild.remove();
+    }
+  }
 
+  function getSvgFromTemplateFile(template) {
+    const svgTemplate = createHtmlElement({ tag: 'template' });
+    svgTemplate.innerHTML = template;
+
+    const svg = svgTemplate.content.firstElementChild.cloneNode(true);
+    return svg;
+  }
+
+  function buildButtonsPanel() {
+    const images = gallery.querySelectorAll('.gallery .image-wrapper');
+    const buttons = gallery.querySelector('.gallery .gallery-buttons');
+    clearGalleryButtons();
+
+    images.forEach((item, index) => {
+      let newButton;
+      if (index === currentImage) {
+        newButton = getSvgFromTemplateFile(selected);
+      } else {
+        newButton = getSvgFromTemplateFile(unselected);
+      }
+
+      newButton.addEventListener('click', () => {
+        displayImage(index);
+      });
+
+      buttons.appendChild(newButton);
+    });
+  }
   function displayCurrentImage() {
     imageContainer.style.top = `calc(${-currentImage}*100%)`;
     buildButtonsPanel();
@@ -64,6 +71,8 @@ function createImageGallery() {
     currentImage = index;
     displayCurrentImage();
   }
+
+  displayCurrentImage();
 
   function nextImage() {
     currentImage += 1;
@@ -87,33 +96,21 @@ function createImageGallery() {
   gallery.querySelector('.nav-left').addEventListener('click', previousImage);
   gallery.querySelector('.nav-right').addEventListener('click', nextImage);
 
-  function clearGalleryButtons() {
-    const buttonContainer = gallery.querySelector('.gallery .gallery-buttons');
-
-    while (buttonContainer.hasChildNodes() === true) {
-      buttonContainer.firstChild.remove();
-    }
-  }
-
-  function buildButtonsPanel() {
-    const images = gallery.querySelectorAll('.gallery .image-wrapper');
-    const buttons = gallery.querySelector('.gallery .gallery-buttons');
-    clearGalleryButtons();
-
-    images.forEach((item, index) => {
-      let newButton;
-      if (index === currentImage) {
-        newButton = getSvgFromTemplateFile(selected);
-      } else {
-        newButton = getSvgFromTemplateFile(unselected);
-      }
-
-      newButton.addEventListener('click', () => {
-        displayImage(index);
-      });
-
-      buttons.appendChild(newButton);
+  function getWrappedImage(img) {
+    const imageWrapper = createHtmlElement({
+      tag: 'div',
+      classes: ['image-wrapper'],
     });
+    const image = createHtmlElement({
+      tag: 'img',
+      properties: {
+        src: img,
+      },
+    });
+
+    imageWrapper.appendChild(image);
+
+    return imageWrapper;
   }
 
   setInterval(nextImage, 5000);
