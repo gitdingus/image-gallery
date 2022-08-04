@@ -4,7 +4,6 @@ import unselected from './templates/radio-unselected-svg-template.html';
 import selected from './templates/radio-selected-svg-template.html';
 import './gallery.css';
 
-
 function createImageGallery(images) {
   let currentImage = 0;
 
@@ -14,9 +13,27 @@ function createImageGallery(images) {
   const gallery = galleryTemplate.content.firstElementChild.cloneNode(true);
   const imageContainer = gallery.querySelector('.image-container');
 
+  function getWrappedImage(img) {
+    const imageWrapper = createHtmlElement({
+      tag: 'div',
+      classes: ['image-wrapper'],
+    });
+    const image = createHtmlElement({
+      tag: 'img',
+      properties: {
+        src: img,
+      },
+    });
+
+    imageWrapper.appendChild(image);
+
+    return imageWrapper;
+  }
+
   images.forEach((img) => {
     imageContainer.appendChild(getWrappedImage(img));
   });
+
   function clearGalleryButtons() {
     const buttonContainer = gallery.querySelector('.gallery .gallery-buttons');
 
@@ -86,23 +103,6 @@ function createImageGallery(images) {
 
   gallery.querySelector('.nav-left').addEventListener('click', previousImage);
   gallery.querySelector('.nav-right').addEventListener('click', nextImage);
-
-  function getWrappedImage(img) {
-    const imageWrapper = createHtmlElement({
-      tag: 'div',
-      classes: ['image-wrapper'],
-    });
-    const image = createHtmlElement({
-      tag: 'img',
-      properties: {
-        src: img,
-      },
-    });
-
-    imageWrapper.appendChild(image);
-
-    return imageWrapper;
-  }
 
   setInterval(nextImage, 5000);
 
