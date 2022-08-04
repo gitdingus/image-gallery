@@ -50,6 +50,11 @@ function createImageGallery(images) {
     return svg;
   }
 
+  function displayImage(index) {
+    imageContainer.style.top = `calc(${-index}*100%)`;
+    buildButtonsPanel();
+  }
+
   function buildButtonsPanel() {
     const imagesDiv = gallery.querySelectorAll('.gallery .image-wrapper');
     const buttons = gallery.querySelector('.gallery .gallery-buttons');
@@ -70,17 +75,8 @@ function createImageGallery(images) {
       buttons.appendChild(newButton);
     });
   }
-  function displayCurrentImage() {
-    imageContainer.style.top = `calc(${-currentImage}*100%)`;
-    buildButtonsPanel();
-  }
 
-  function displayImage(index) {
-    currentImage = index;
-    displayCurrentImage();
-  }
-
-  displayCurrentImage();
+  displayImage(currentImage);
 
   function nextImage() {
     currentImage += 1;
@@ -88,7 +84,7 @@ function createImageGallery(images) {
     if (currentImage > images.length - 1) {
       currentImage = 0;
     }
-    displayCurrentImage();
+    displayImage(currentImage);
   }
 
   function previousImage() {
@@ -98,7 +94,7 @@ function createImageGallery(images) {
       currentImage = images.length - 1;
     }
 
-    displayCurrentImage();
+    displayImage(currentImage);
   }
 
   gallery.querySelector('.nav-left').addEventListener('click', previousImage);
