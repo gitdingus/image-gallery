@@ -34,11 +34,11 @@ function createImageGallery(images) {
   }
 
   function buildButtonsPanel() {
-    const images = gallery.querySelectorAll('.gallery .image-wrapper');
+    const imagesDiv = gallery.querySelectorAll('.gallery .image-wrapper');
     const buttons = gallery.querySelector('.gallery .gallery-buttons');
     clearGalleryButtons();
 
-    images.forEach((item, index) => {
+    imagesDiv.forEach((item, index) => {
       let newButton;
       if (index === currentImage) {
         newButton = getSvgFromTemplateFile(selected);
@@ -68,7 +68,7 @@ function createImageGallery(images) {
   function nextImage() {
     currentImage += 1;
 
-    if (currentImage > imagesArray.length - 1) {
+    if (currentImage > images.length - 1) {
       currentImage = 0;
     }
     displayCurrentImage();
@@ -78,7 +78,7 @@ function createImageGallery(images) {
     currentImage -= 1;
 
     if (currentImage < 0) {
-      currentImage = imagesArray.length - 1;
+      currentImage = images.length - 1;
     }
 
     displayCurrentImage();
